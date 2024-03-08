@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "fireflight:item/bow/torch/pulling_2_3"
+    }
+}
