@@ -34,6 +34,6 @@ public class TorchArrowRenderer extends ArrowRenderer<TorchArrow> {
     @Override
     public void render(@NotNull TorchArrow entity, float entityYaw, float partialTicks,
                        @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, LightTexture.FULL_BRIGHT);
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 }

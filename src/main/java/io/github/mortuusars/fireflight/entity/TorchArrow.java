@@ -12,6 +12,8 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,7 +34,8 @@ import javax.naming.OperationNotSupportedException;
 
 public class TorchArrow extends AbstractArrow {
     protected boolean torchWasPlaced;
-    private ItemStack storedTorch = ItemStack.EMPTY;
+    protected ItemStack storedTorch = ItemStack.EMPTY;
+    protected int inGroundItemDropTimer = Config.Common.TORCH_IN_GROUND_ITEM_DROP_TIME.get();
 
     public TorchArrow(EntityType<? extends TorchArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -84,10 +87,29 @@ public class TorchArrow extends AbstractArrow {
         if (torchWasPlaced)
             this.remove(RemovalReason.DISCARDED);
 
+        if (inGround && !torchWasPlaced) {
+            if (inGroundItemDropTimer == 0) {
+                if (!level().isClientSide) {
+                    Containers.dropItemStack(level(), getX(), getY(), getZ(), storedTorch);
+                    playSound(SoundEvents.WOOD_BREAK, 0.7f, 0.7f);
+                }
+
+                this.remove(RemovalReason.DISCARDED);
+            }
+            else {
+                inGroundItemDropTimer--;
+            }
+        }
+
         super.tick();
 
         if (level().isClientSide)
             spawnOnTickParticles(level());
+    }
+
+    @Override
+    public @NotNull Vec3 getLightProbePosition(float pPartialTicks) {
+        return position();
     }
 
     @Override
@@ -270,8 +292,9 @@ public class TorchArrow extends AbstractArrow {
         super.addAdditionalSaveData(tag);
         if (!storedTorch.isEmpty())
             tag.put("StoredTorch", storedTorch.save(new CompoundTag()));
-        if (torchWasPlaced)
-            tag.putBoolean("TorchWasPlaced", true);
+
+        tag.putBoolean("TorchWasPlaced", true);
+        tag.putInt("InGroundItemDropTimer", inGroundItemDropTimer);
     }
 
     @Override
@@ -282,5 +305,6 @@ public class TorchArrow extends AbstractArrow {
             storedTorch = ItemStack.of(tag.getCompound("StoredTorch"));
 
         torchWasPlaced = tag.getBoolean("TorchWasPlaced");
+        inGroundItemDropTimer = tag.getInt("InGroundItemDropTimer");
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -27,6 +28,11 @@ public class ClientEvents {
             ItemProperties.register(Items.CROSSBOW, new ResourceLocation("torch"), ClientEvents::getCrossbowTorchOverrideValue);
             ItemProperties.register(Items.CROSSBOW, new ResourceLocation("torch_animation"), ClientEvents::getTorchPulledValue);
         });
+    }
+
+    @SubscribeEvent
+    public static void registerModels(ModelEvent.RegisterAdditional event) {
+        event.register(Fireflight.resource("item/bow_overlay"));
     }
 
     /**

@@ -1,17 +1,7 @@
 package io.github.mortuusars.fireflight;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.codehaus.plexus.util.dag.DAG;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = Fireflight.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config
@@ -19,10 +9,11 @@ public class Config
     public static class Common {
         public static final ForgeConfigSpec SPEC;
 
+        public static final ForgeConfigSpec.EnumValue<TorchAmmoSelectionBehavior> AMMO_SELECTION_BEHAVIOR;
+        public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_DURABILITY_COST;
         public static final ForgeConfigSpec.DoubleValue TORCH_DAMAGE;
         public static final ForgeConfigSpec.IntValue TORCH_IGNITE_SECONDS;
-        public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_DURABILITY_COST;
-        public static final ForgeConfigSpec.EnumValue<TorchAmmoSelectionBehavior> AMMO_SELECTION_BEHAVIOR;
+        public static final ForgeConfigSpec.IntValue TORCH_IN_GROUND_ITEM_DROP_TIME;
 
 //        public static final ForgeConfigSpec.BooleanValue SHOOTING_TORCHES_DISPENSER;
 //        public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_WITHER_SECONDS;
@@ -32,9 +23,23 @@ public class Config
         static {
             ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
-            int igniteDurationSeconds = 5;
-            double baseTorchDamage = 0.5;
+            TorchAmmoSelectionBehavior ammoSelectionBehavior = TorchAmmoSelectionBehavior.HOTBAR_REVERSED;
             int durabilityCost = 2;
+            double baseTorchDamage = 0.5;
+            int igniteDurationSeconds = 5;
+            int inGroundItemDropTime = 400;
+
+            AMMO_SELECTION_BEHAVIOR = builder
+                    .comment("Controls how torch would be considered as an ammo for a bow/crossbow. Default: " + ammoSelectionBehavior,
+                            "MAINHAND_OFFHAND: Only when holding torch in one of the hands.",
+                            "HOTBAR_IGNORED: Torches in hotbar will not be used as ammo.",
+                            "HOTBAR_REVERSED: ie: Arrow in slot 9 will be chosen over a Torch in slot 1-8. And vise-versa. Useful when you carry torches in one of the first slots and don't want them to take priority when shooting.",
+                            "REGULAR: Ammo will be chosen from left to right like usual. Hotbar, then 1-3 inventory rows.")
+                    .defineEnum("TorchAmmoBehavior", ammoSelectionBehavior);
+
+            SHOOTING_TORCHES_DURABILITY_COST = builder
+                    .comment("Amount of durability loss per shot. Default: " + durabilityCost)
+                    .defineInRange("DurabilityCost", durabilityCost, 1, Integer.MAX_VALUE);
 
             TORCH_DAMAGE = builder
                     .comment("Base damage of the torch projectile. Default: " + baseTorchDamage)
@@ -45,17 +50,11 @@ public class Config
                             "Default: " + igniteDurationSeconds)
                     .defineInRange("IgniteDuration", igniteDurationSeconds, 0, Integer.MAX_VALUE);
 
-            SHOOTING_TORCHES_DURABILITY_COST = builder
-                    .comment("Amount of durability loss per shot. Default: " + durabilityCost)
-                    .defineInRange("DurabilityCost", durabilityCost, 1, Integer.MAX_VALUE);
+            TORCH_IN_GROUND_ITEM_DROP_TIME = builder
+                    .comment("How many ticks torch projectile will wait before dropping as an item ",
+                            "when stuck in a face of a block (torch wasn't placed). Default: " + inGroundItemDropTime)
+                    .defineInRange("TorchProjectileItemDropTime", inGroundItemDropTime, 0, Integer.MAX_VALUE);
 
-            AMMO_SELECTION_BEHAVIOR = builder
-                    .comment("Controls how torch would be considered as an ammo for a bow/crossbow. Default: HOTBAR_REVERSED.",
-                            "MAINHAND_OFFHAND: Only when holding torch in one of the hands.",
-                            "HOTBAR_IGNORED: Torches in hotbar will not be used as ammo.",
-                            "HOTBAR_REVERSED: ie: Arrow in slot 9 will be chosen over a Torch in slot 1-8. And vise-versa. Useful when you carry torches in one of the first slots and don't want them to take priority when shooting.",
-                            "REGULAR: Ammo will be chosen from left to right like usual. Hotbar, then 1-3 inventory rows.")
-                    .defineEnum("TorchAmmoBehavior", TorchAmmoSelectionBehavior.HOTBAR_REVERSED);
 
             SPEC = builder.build();
         }
