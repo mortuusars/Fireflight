@@ -1,6 +1,8 @@
 package io.github.mortuusars.fireflight;
 
 import com.google.common.base.Preconditions;
+import io.github.mortuusars.fireflight.entity.RedstoneTorchArrow;
+import io.github.mortuusars.fireflight.entity.SoulTorchArrow;
 import io.github.mortuusars.fireflight.entity.TorchArrow;
 import io.github.mortuusars.fireflight.event.ClientEvents;
 import io.github.mortuusars.fireflight.event.CommonEvents;
@@ -40,7 +42,7 @@ public class Fireflight
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.Common.SPEC);
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        Entities.ENTITIES.register(modEventBus);
+        Entities.register(modEventBus);
 
         modEventBus.register(ClientEvents.class);
 
@@ -59,13 +61,15 @@ public class Fireflight
         Preconditions.checkArgument(Fireflight.isShootableTorch(ammoStack));
 
         TorchArrow torchArrow;
+        ItemStack torchStack = ammoStack.copy().split(1);
 
-//            if (ammoStack.is(Fireflight.Tags.Items.SOUL_TORCH))
-//                torchArrow = new SoulTorchArrow(level, shooter);
-//            else if (ammoStack.is(Fireflight.Tags.Items.REDSTONE_TORCH))
-//                torchArrow = new RedstoneTorchArrow(level, shooter);
-//            else
-        torchArrow = new TorchArrow(level, shooter, ammoStack.copy().split(1));
+        if (ammoStack.is(Fireflight.Tags.Items.SOUL_TORCH))
+            torchArrow = new SoulTorchArrow(level, shooter, torchStack);
+        else if (ammoStack.is(Fireflight.Tags.Items.REDSTONE_TORCH))
+            torchArrow = new RedstoneTorchArrow(level, shooter, torchStack);
+        else {
+            torchArrow = new TorchArrow(level, shooter, torchStack);
+        }
 
         torchArrow.setBaseDamage(Config.Common.TORCH_DAMAGE.get());
 
@@ -79,19 +83,19 @@ public class Fireflight
                 () -> EntityType.Builder.<TorchArrow>of(TorchArrow::new, MobCategory.MISC)
                         .sized(0.5F, 0.5F)
                         .fireImmune()
-                        .build("torch_arrow"));
+                        .build("torch"));
 
-//        public static final RegistryObject<EntityType<SoulTorchArrow>> SOUL_TORCH_ARROW = ENTITIES.register("soul_torch_arrow",
-//                () -> EntityType.Builder.<SoulTorchArrow>of(SoulTorchArrow::new, MobCategory.MISC)
-//                        .sized(0.5F, 0.5F)
-//                        .fireImmune()
-//                        .build("soul_torch_arrow"));
-//
-//        public static final RegistryObject<EntityType<RedstoneTorchArrow>> REDSTONE_TORCH_ARROW = ENTITIES.register("redstone_torch_arrow",
-//                () -> EntityType.Builder.<RedstoneTorchArrow>of(RedstoneTorchArrow::new, MobCategory.MISC)
-//                        .sized(0.5F, 0.5F)
-//                        .fireImmune()
-//                        .build("redstone_torch_arrow"));
+        public static final RegistryObject<EntityType<SoulTorchArrow>> SOUL_TORCH_ARROW = ENTITIES.register("soul_torch",
+                () -> EntityType.Builder.<SoulTorchArrow>of(SoulTorchArrow::new, MobCategory.MISC)
+                        .sized(0.5F, 0.5F)
+                        .fireImmune()
+                        .build("soul_torch"));
+
+        public static final RegistryObject<EntityType<RedstoneTorchArrow>> REDSTONE_TORCH_ARROW = ENTITIES.register("redstone_torch",
+                () -> EntityType.Builder.<RedstoneTorchArrow>of(RedstoneTorchArrow::new, MobCategory.MISC)
+                        .sized(0.5F, 0.5F)
+                        .fireImmune()
+                        .build("redstone_torch"));
 
         public static void register(IEventBus bus) {
             ENTITIES.register(bus);

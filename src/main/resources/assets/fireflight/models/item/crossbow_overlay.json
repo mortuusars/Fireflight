@@ -11,40 +11,17 @@
       },
       "model": "fireflight:item/crossbow/torch"
     },
-
     {
       "predicate": {
         "charged": 1,
-        "torch": 0.2
+        "fireflight:torch_type": 0.2
       },
-      "model": "fireflight:item/crossbow/soul_torch_0"
+      "model": "fireflight:item/crossbow/soul_torch"
     },
     {
       "predicate": {
         "charged": 1,
-        "torch": 0.2
-      },
-      "model": "fireflight:item/crossbow/soul_torch_1"
-    },
-    {
-      "predicate": {
-        "charged": 1,
-        "torch": 0.2
-      },
-      "model": "fireflight:item/crossbow/soul_torch_2"
-    },
-    {
-      "predicate": {
-        "charged": 1,
-        "torch": 0.2
-      },
-      "model": "fireflight:item/crossbow/soul_torch_3"
-    },
-
-    {
-      "predicate": {
-        "charged": 1,
-        "torch": 0.3
+        "fireflight:torch_type": 0.3
       },
       "model": "fireflight:item/crossbow/redstone_torch"
     }

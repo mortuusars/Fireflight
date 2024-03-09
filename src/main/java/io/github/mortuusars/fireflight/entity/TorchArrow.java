@@ -12,7 +12,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -41,21 +40,14 @@ public class TorchArrow extends AbstractArrow {
         super(pEntityType, pLevel);
     }
 
-    public TorchArrow(EntityType<? extends TorchArrow> entityType, Level level, LivingEntity shooter) {
+    public TorchArrow(EntityType<? extends TorchArrow> entityType, Level level, LivingEntity shooter, ItemStack storedTorch) {
         super(entityType, shooter, level);
+        this.storedTorch = storedTorch;
     }
 
     public TorchArrow(Level level, LivingEntity shooter, ItemStack storedTorch) {
         super(Fireflight.Entities.TORCH_ARROW.get(), shooter, level);
         this.storedTorch = storedTorch;
-    }
-
-    public TorchArrow(Level pLevel, double pX, double pY, double pZ) {
-        super(Fireflight.Entities.TORCH_ARROW.get(), pX, pY, pZ, pLevel);
-    }
-
-    public TorchArrow(EntityType<? extends TorchArrow> redstoneTorchArrowEntityType, double pX, double pY, double pZ, Level pLevel) {
-        super(redstoneTorchArrowEntityType, pX, pY, pZ, pLevel);
     }
 
     public ItemStack getStoredTorch() {

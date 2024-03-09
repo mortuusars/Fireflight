@@ -13,12 +13,11 @@ public class Config
         public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_DURABILITY_COST;
         public static final ForgeConfigSpec.DoubleValue TORCH_DAMAGE;
         public static final ForgeConfigSpec.IntValue TORCH_IGNITE_SECONDS;
+        public static final ForgeConfigSpec.IntValue SOUL_TORCH_WITHER_SECONDS;
+        public static final ForgeConfigSpec.IntValue REDSTONE_TORCH_SLOWNESS_SECONDS;
         public static final ForgeConfigSpec.IntValue TORCH_IN_GROUND_ITEM_DROP_TIME;
 
 //        public static final ForgeConfigSpec.BooleanValue SHOOTING_TORCHES_DISPENSER;
-//        public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_WITHER_SECONDS;
-//        public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_SLOWNESS_SECONDS;
-//        public static final ForgeConfigSpec.BooleanValue SHOOTING_TORCHES_IGNORE_HOTBAR;
 
         static {
             ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -27,6 +26,8 @@ public class Config
             int durabilityCost = 2;
             double baseTorchDamage = 0.5;
             int igniteDurationSeconds = 5;
+            int witherDurationSeconds = 8;
+            int slownessDurationSeconds = 20;
             int inGroundItemDropTime = 400;
 
             AMMO_SELECTION_BEHAVIOR = builder
@@ -46,14 +47,24 @@ public class Config
                     .defineInRange("TorchDamage", baseTorchDamage, 0.01, 99);
 
             TORCH_IGNITE_SECONDS = builder
-                    .comment("How long entity that has been hit by torch will burn. In Seconds. Set to 0 to disable. " +
-                            "Default: " + igniteDurationSeconds)
-                    .defineInRange("IgniteDuration", igniteDurationSeconds, 0, Integer.MAX_VALUE);
+                    .comment("How long entity that has been hit by torch will burn. " +
+                            "In Seconds. Set to 0 to disable. Default: " + igniteDurationSeconds)
+                    .defineInRange("TorchIgniteDuration", igniteDurationSeconds, 0, Integer.MAX_VALUE);
+
+            SOUL_TORCH_WITHER_SECONDS = builder
+                    .comment("How long entity that has been hit by soul torch will have the wither debuff. " +
+                            "In Seconds. Set to 0 to disable. Default: " + witherDurationSeconds)
+                    .defineInRange("SoulWitherDuration", witherDurationSeconds, 0, Integer.MAX_VALUE);
+
+            REDSTONE_TORCH_SLOWNESS_SECONDS = builder
+                    .comment("How long entity that has been hit by redstone torch will have the slowness debuff. " +
+                            "In Seconds. Set to 0 to disable. Default: " + slownessDurationSeconds)
+                    .defineInRange("RedstoneSlownessDuration", slownessDurationSeconds, 0, Integer.MAX_VALUE);
 
             TORCH_IN_GROUND_ITEM_DROP_TIME = builder
                     .comment("How many ticks torch projectile will wait before dropping as an item ",
                             "when stuck in a face of a block (torch wasn't placed). Default: " + inGroundItemDropTime)
-                    .defineInRange("TorchProjectileItemDropTime", inGroundItemDropTime, 0, Integer.MAX_VALUE);
+                    .defineInRange("TorchProjectileStuckTime", inGroundItemDropTime, 0, Integer.MAX_VALUE);
 
 
             SPEC = builder.build();

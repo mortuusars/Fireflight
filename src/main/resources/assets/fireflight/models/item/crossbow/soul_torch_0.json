@@ -1,6 +1,0 @@
-{
-    "parent": "item/crossbow",
-    "textures": {
-        "layer0": "fireflight:item/crossbow/soul_torch_0"
-    }
-}

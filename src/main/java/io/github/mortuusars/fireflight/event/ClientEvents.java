@@ -20,9 +20,10 @@ public class ClientEvents {
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             EntityRenderers.register(Fireflight.Entities.TORCH_ARROW.get(), context -> new TorchArrowRenderer(context, TorchType.TORCH));
+            EntityRenderers.register(Fireflight.Entities.SOUL_TORCH_ARROW.get(), context -> new TorchArrowRenderer(context, TorchType.SOUL));
+            EntityRenderers.register(Fireflight.Entities.REDSTONE_TORCH_ARROW.get(), context -> new TorchArrowRenderer(context, TorchType.REDSTONE));
 
             ItemProperties.registerGeneric(Fireflight.resource("torch_type"), ClientEvents::getTorchType);
-//            ItemProperties.registerGeneric(Fireflight.resource("charged_torch"), ClientEvents::getCrossbowChargedTorchValue);
         });
     }
 
