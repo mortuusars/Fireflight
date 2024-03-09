@@ -23,46 +23,9 @@
       "predicate": {
         "pulling": 1,
         "torch": 0.1,
-        "torch_pulled_animation": 0,
         "pull": 0.9
       },
       "model": "fireflight:item/bow/torch/pulling_2"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "torch": 0.1,
-        "torch_pulled_animation": 0.2,
-        "pull": 0.9
-      },
-      "model": "fireflight:item/bow/torch/pulling_2_0"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "torch": 0.1,
-        "torch_pulled_animation": 0.4,
-        "pull": 0.9
-      },
-      "model": "fireflight:item/bow/torch/pulling_2_1"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "torch": 0.1,
-        "torch_pulled_animation": 0.6,
-        "pull": 0.9
-      },
-      "model": "fireflight:item/bow/torch/pulling_2_2"
-    },
-    {
-      "predicate": {
-        "pulling": 1,
-        "torch": 0.1,
-        "torch_pulled_animation": 0.8,
-        "pull": 0.9
-      },
-      "model": "fireflight:item/bow/torch/pulling_2_3"
     },
 
     {

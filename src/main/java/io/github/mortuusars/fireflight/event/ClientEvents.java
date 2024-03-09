@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -22,17 +21,18 @@ public class ClientEvents {
         event.enqueueWork(() -> {
             EntityRenderers.register(Fireflight.Entities.TORCH_ARROW.get(), context -> new TorchArrowRenderer(context, TorchType.TORCH));
 
-            ItemProperties.register(Items.BOW, new ResourceLocation("torch"), ClientEvents::getBowTorchOverrideValue);
-            ItemProperties.register(Items.BOW, new ResourceLocation("torch_pulled_animation"), ClientEvents::getTorchPulledValue);
+            ItemProperties.registerGeneric(new ResourceLocation("torch"), ClientEvents::getBowTorchOverrideValue);
+            ItemProperties.registerGeneric(new ResourceLocation("crossbow_torch"), ClientEvents::getCrossbowTorchOverrideValue);
 
-            ItemProperties.register(Items.CROSSBOW, new ResourceLocation("torch"), ClientEvents::getCrossbowTorchOverrideValue);
-            ItemProperties.register(Items.CROSSBOW, new ResourceLocation("torch_animation"), ClientEvents::getTorchPulledValue);
+//            ItemProperties.registerGeneric(new ResourceLocation("torch_pulled_animation"), ClientEvents::getAnimationValue);
+//            ItemProperties.registerGeneric(new ResourceLocation("crossbow_torch_animation"), ClientEvents::getAnimationValue);
         });
     }
 
     @SubscribeEvent
     public static void registerModels(ModelEvent.RegisterAdditional event) {
         event.register(Fireflight.resource("item/bow_overlay"));
+        event.register(Fireflight.resource("item/crossbow_overlay"));
     }
 
     /**
@@ -55,7 +55,7 @@ public class ClientEvents {
     /**
      * Value for a looping animation. 0.05 per tick.
      */
-    public static float getTorchPulledValue(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
+    public static float getAnimationValue(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
         return level != null ? level.getGameTime() % 20 / 20F : 0F;
     }
 }

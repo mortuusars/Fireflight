@@ -24,9 +24,10 @@ import java.util.List;
 
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixin {
-
     @Unique
     private static final ResourceLocation BOW_OVERLAY = Fireflight.resource("item/bow_overlay");
+    @Unique
+    private static final ResourceLocation CROSSBOW_OVERLAY = Fireflight.resource("item/crossbow_overlay");
 
     /**
      * Combines item model with overlay model.

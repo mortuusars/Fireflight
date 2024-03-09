@@ -1,18 +1,18 @@
 package io.github.mortuusars.fireflight.event;
 
-import com.google.common.base.Preconditions;
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
 import io.github.mortuusars.fireflight.TorchAmmoSelectionBehavior;
 import io.github.mortuusars.fireflight.TorchType;
-import io.github.mortuusars.fireflight.entity.TorchArrow;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingGetProjectileEvent;
@@ -139,7 +139,7 @@ public class CommonEvents {
                 float power = BowItem.getPowerForTime(event.getCharge());
 
                 if (power >= 0.1F) {
-                    AbstractArrow arrow = createArrowFromItem(projectile, level, player);
+                    AbstractArrow arrow = Fireflight.createArrowFromItem(projectile, level, player);
                     arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0F, power * 3.0F, 1F);
 
                     if (power == 1.0F) {
@@ -177,23 +177,6 @@ public class CommonEvents {
                     event.setCanceled(true);
                 }
             }
-        }
-
-        public static AbstractArrow createArrowFromItem(ItemStack ammoStack, Level level, LivingEntity shooter) {
-            Preconditions.checkArgument(Fireflight.isShootableTorch(ammoStack));
-
-            TorchArrow torchArrow;
-
-//            if (ammoStack.is(Fireflight.Tags.Items.SOUL_TORCH))
-//                torchArrow = new SoulTorchArrow(level, shooter);
-//            else if (ammoStack.is(Fireflight.Tags.Items.REDSTONE_TORCH))
-//                torchArrow = new RedstoneTorchArrow(level, shooter);
-//            else
-            torchArrow = new TorchArrow(level, shooter, ammoStack.copy().split(1));
-
-            torchArrow.setBaseDamage(Config.Common.TORCH_DAMAGE.get());
-
-            return torchArrow;
         }
     }
 }

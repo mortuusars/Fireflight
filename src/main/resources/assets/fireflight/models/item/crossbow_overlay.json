@@ -1,0 +1,103 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "fireflight:item/empty"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -90, 0, -60 ],
+      "translation": [ 2, 0.1, -3 ],
+      "scale": [ 0.9, 0.9, 0.9 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -90, 0, 30 ],
+      "translation": [ 2, 0.1, -3 ],
+      "scale": [ 0.9, 0.9, 0.9 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ -90, 0, -55 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ -90, 0, 35 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.1,
+        "torch_animation": 0
+      },
+      "model": "fireflight:item/crossbow/torch_0"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.1,
+        "torch_animation": 0.25
+      },
+      "model": "fireflight:item/crossbow/torch_1"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.1,
+        "torch_animation": 0.5
+      },
+      "model": "fireflight:item/crossbow/torch_2"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.1,
+        "torch_animation": 0.75
+      },
+      "model": "fireflight:item/crossbow/torch_3"
+    },
+
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.2,
+        "torch_animation": 0
+      },
+      "model": "fireflight:item/crossbow/soul_torch_0"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.2,
+        "torch_animation": 0.25
+      },
+      "model": "fireflight:item/crossbow/soul_torch_1"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.2,
+        "torch_animation": 0.5
+      },
+      "model": "fireflight:item/crossbow/soul_torch_2"
+    },
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.2,
+        "torch_animation": 0.75
+      },
+      "model": "fireflight:item/crossbow/soul_torch_3"
+    },
+
+    {
+      "predicate": {
+        "charged": 1,
+        "torch": 0.3
+      },
+      "model": "fireflight:item/crossbow/redstone_torch"
+    }
+  ]
+}
