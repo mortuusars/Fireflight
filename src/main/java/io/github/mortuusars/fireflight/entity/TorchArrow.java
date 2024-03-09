@@ -16,6 +16,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -102,6 +103,16 @@ public class TorchArrow extends AbstractArrow {
     @Override
     public @NotNull Vec3 getLightProbePosition(float pPartialTicks) {
         return position();
+    }
+
+    @Override
+    public void shoot(double pX, double pY, double pZ, float pVelocity, float pInaccuracy) {
+        // Crossbow sets pickup to CREATIVE ONLY for additional projectiles with multishot.
+        // Since we consume 3 torches instead of 1 when loading - we should be able to pick up all projectiles.
+        if (getOwner() instanceof Player player && !player.isCreative())
+            this.pickup = Pickup.ALLOWED; // Hopefully this wouldn't cause a dupe of some sort.
+
+        super.shoot(pX, pY, pZ, pVelocity, pInaccuracy);
     }
 
     @Override

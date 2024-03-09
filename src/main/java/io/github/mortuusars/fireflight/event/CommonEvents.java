@@ -86,8 +86,11 @@ public class CommonEvents {
                 return; // No shootable torches in inventory
             }
 
-            if (torchSelection == TorchAmmoSelectionBehavior.HOTBAR_REVERSED && projectileSlot < 9) {
-                for (int i = 8; i >= projectileSlot; i--) {
+            if (torchSelection == TorchAmmoSelectionBehavior.HOTBAR_REVERSED) {
+                for (int i = 8; i >= 0; i--) {
+                    if (projectileSlot == i)
+                        return;
+
                     ItemStack stack = player.getInventory().getItem(i);
 
                     if (Fireflight.isShootableTorch(stack)) {
@@ -95,11 +98,9 @@ public class CommonEvents {
                         return;
                     }
                 }
-
-                return; // No torches before default projectile (from right).
             }
 
-            int startIndex = torchSelection == TorchAmmoSelectionBehavior.HOTBAR_IGNORED ? 9 : 0;
+            int startIndex = torchSelection == TorchAmmoSelectionBehavior.REGULAR ? 0 : 9;
 
             for (int i = startIndex; i < Math.min(player.getInventory().getContainerSize(), projectileSlot + 1); i++) {
                 ItemStack stack = player.getInventory().getItem(i);
