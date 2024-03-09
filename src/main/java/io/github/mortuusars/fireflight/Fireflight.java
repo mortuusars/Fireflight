@@ -4,7 +4,9 @@ import com.google.common.base.Preconditions;
 import io.github.mortuusars.fireflight.entity.TorchArrow;
 import io.github.mortuusars.fireflight.event.ClientEvents;
 import io.github.mortuusars.fireflight.event.CommonEvents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -97,12 +100,11 @@ public class Fireflight
 
     public static class Tags {
         public static class Items {
-            public static final TagKey<Item> TORCH = Objects.requireNonNull(ForgeRegistries.ITEMS.tags())
-                    .createTagKey(Fireflight.resource("torches"));
-            public static final TagKey<Item> SOUL_TORCH = Objects.requireNonNull(ForgeRegistries.ITEMS.tags())
-                    .createTagKey(Fireflight.resource("soul_torches"));
-            public static final TagKey<Item> REDSTONE_TORCH = Objects.requireNonNull(ForgeRegistries.ITEMS.tags())
-                    .createTagKey(Fireflight.resource("redstone_torches"));
+            public static final TagKey<Item> TORCH = TagKey.create(Registries.ITEM, Fireflight.resource("torches"));
+            public static final TagKey<Item> SOUL_TORCH = TagKey.create(Registries.ITEM, Fireflight.resource("soul_torches"));
+            public static final TagKey<Item> REDSTONE_TORCH = TagKey.create(Registries.ITEM, Fireflight.resource("redstone_torches"));
+
+            public static final TagKey<Item> CANNOT_SHOOT_TORCHES = TagKey.create(Registries.ITEM, Fireflight.resource("cannot_shoot_torches"));
         }
     }
 }

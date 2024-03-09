@@ -6,8 +6,8 @@ import io.github.mortuusars.fireflight.render.TorchArrowRenderer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.ModelEvent;
@@ -21,11 +21,8 @@ public class ClientEvents {
         event.enqueueWork(() -> {
             EntityRenderers.register(Fireflight.Entities.TORCH_ARROW.get(), context -> new TorchArrowRenderer(context, TorchType.TORCH));
 
-            ItemProperties.registerGeneric(new ResourceLocation("torch"), ClientEvents::getBowTorchOverrideValue);
-            ItemProperties.registerGeneric(new ResourceLocation("crossbow_torch"), ClientEvents::getCrossbowTorchOverrideValue);
-
-//            ItemProperties.registerGeneric(new ResourceLocation("torch_pulled_animation"), ClientEvents::getAnimationValue);
-//            ItemProperties.registerGeneric(new ResourceLocation("crossbow_torch_animation"), ClientEvents::getAnimationValue);
+            ItemProperties.registerGeneric(Fireflight.resource("torch_type"), ClientEvents::getTorchType);
+//            ItemProperties.registerGeneric(Fireflight.resource("charged_torch"), ClientEvents::getCrossbowChargedTorchValue);
         });
     }
 
@@ -38,24 +35,23 @@ public class ClientEvents {
     /**
      * Ammo type. Torch - 0.1, Soul Torch - 0.2, Redstone Torch - 0.3. All other ammo - 0.0.
      */
-    public static float getBowTorchOverrideValue(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
-        return livingEntity != null && livingEntity.isUsingItem() ? TorchType.getFromStack(livingEntity.getProjectile(stack)).getFloatValue() : 0F;
-    }
+    public static float getTorchType(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
+        if (livingEntity == null || stack.is(Fireflight.Tags.Items.CANNOT_SHOOT_TORCHES))
+            return 0f;
 
-    /**
-     * Same as for bow, but from a crossbow stack 'ChargedProjectiles' tag.
-     */
-    public static float getCrossbowTorchOverrideValue(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
-        for (ItemStack projectileStack : CrossbowItem.getChargedProjectiles(stack)) {
-            return TorchType.getFromStack(projectileStack).getFloatValue();
+        if (stack.getItem() instanceof BowItem) {
+            if (livingEntity.isUsingItem())
+                return TorchType.getFromStack(livingEntity.getProjectile(stack)).getFloatValue();
+            return 0f;
         }
-        return 0F;
-    }
 
-    /**
-     * Value for a looping animation. 0.05 per tick.
-     */
-    public static float getAnimationValue(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
-        return level != null ? level.getGameTime() % 20 / 20F : 0F;
+        if (stack.getItem() instanceof CrossbowItem) {
+            for (ItemStack projectileStack : CrossbowItem.getChargedProjectiles(stack)) {
+                return TorchType.getFromStack(projectileStack).getFloatValue();
+            }
+            return 0F;
+        }
+
+        return 0f;
     }
 }

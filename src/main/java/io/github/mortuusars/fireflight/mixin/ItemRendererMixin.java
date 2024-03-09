@@ -1,6 +1,5 @@
 package io.github.mortuusars.fireflight.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.fireflight.Fireflight;
 import io.github.mortuusars.fireflight.render.LayeredBakedModel;
 import net.minecraft.client.Minecraft;
@@ -11,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,25 +31,27 @@ public class ItemRendererMixin {
      * Combines item model with overlay model.
      */
     @Inject(method = "getModel", at = @At("RETURN"), cancellable = true)
-    private void getModel(ItemStack stack, Level level, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
-        if (stack.getItem() instanceof BowItem || stack.getItem() instanceof CrossbowItem) {
-            BakedModel cachedModel = LayeredBakedModel.Cache.get(Item.getId(stack.getItem()));
-            if (cachedModel != null)
-                cir.setReturnValue(cachedModel);
-            else {
-                BakedModel originalModel = cir.getReturnValue();
+    private void onGetModel(ItemStack stack, Level level, LivingEntity entity, int seed, CallbackInfoReturnable<BakedModel> cir) {
+        if (stack.is(Fireflight.Tags.Items.CANNOT_SHOOT_TORCHES))
+            return;
 
-                BakedModel overlayModel = Minecraft.getInstance().getModelManager().getModel(BOW_OVERLAY);
-                ClientLevel lvl = level instanceof ClientLevel clientLevel ? clientLevel : null;
-                BakedModel overridenModel = overlayModel.getOverrides().resolve(overlayModel, stack, lvl, entity, seed);
-                if (overridenModel != null)
-                    overlayModel = overridenModel;
+        ResourceLocation overlayModelLocation;
+        if (stack.getItem() instanceof BowItem)
+            overlayModelLocation = BOW_OVERLAY;
+        else if (stack.getItem() instanceof CrossbowItem)
+            overlayModelLocation = CROSSBOW_OVERLAY;
+        else
+            return;
 
-                LayeredBakedModel layeredModel = new LayeredBakedModel(List.of(originalModel, overlayModel));
-                //TODO: cache
-//                LayeredBakedModel.Cache.add(Item.getId(stack.getItem()), layeredModel);
-                cir.setReturnValue(layeredModel);
-            }
-        }
+        BakedModel overlayModel = Minecraft.getInstance().getModelManager().getModel(overlayModelLocation);
+        ClientLevel lvl = level instanceof ClientLevel clientLevel ? clientLevel : null;
+        BakedModel overridenModel = overlayModel.getOverrides().resolve(overlayModel, stack, lvl, entity, seed);
+        if (overridenModel != null)
+            overlayModel = overridenModel;
+
+        BakedModel originalModel = cir.getReturnValue();
+        LayeredBakedModel layeredModel = new LayeredBakedModel(List.of(originalModel, overlayModel));
+
+        cir.setReturnValue(layeredModel);
     }
 }
