@@ -1,11 +1,28 @@
 package io.github.mortuusars.fireflight;
 
+import io.github.mortuusars.fireflight.torch_shooting.TorchAmmoSelectionBehavior;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Fireflight.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config
 {
+    public static class Client {
+        public static final ForgeConfigSpec SPEC;
+
+        public static final ForgeConfigSpec.BooleanValue RENDER_TORCH_OVERLAY;
+
+        static {
+            ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+
+            RENDER_TORCH_OVERLAY = builder
+                    .comment("Render torch projectile on a Bow/Crossbow. It will look like a regular arrow otherwise. Default: true")
+                    .define("RenderTorchOnWeapon", true);
+
+            SPEC = builder.build();
+        }
+    }
+
     public static class Common {
         public static final ForgeConfigSpec SPEC;
 
@@ -67,7 +84,7 @@ public class Config
                     .defineInRange("TorchProjectileStuckTime", inGroundItemDropTime, 0, Integer.MAX_VALUE);
 
             SHOOTING_TORCHES_DISPENSER = builder
-                    .comment("Dispenser will shoot torches.")
+                    .comment("Dispenser will shoot torches. Default: true")
                     .define("DispenserShooting", true);
 
             SPEC = builder.build();

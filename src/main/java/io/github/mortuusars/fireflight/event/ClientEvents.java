@@ -1,12 +1,13 @@
 package io.github.mortuusars.fireflight.event;
 
 import io.github.mortuusars.fireflight.Fireflight;
-import io.github.mortuusars.fireflight.TorchType;
+import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import io.github.mortuusars.fireflight.render.TorchArrowRenderer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +38,7 @@ public class ClientEvents {
      * Ammo type. Torch - 0.1, Soul Torch - 0.2, Redstone Torch - 0.3. All other ammo - 0.0.
      */
     public static float getTorchType(ItemStack stack, ClientLevel level, LivingEntity livingEntity, int seed) {
-        if (livingEntity == null || stack.is(Fireflight.Tags.Items.CANNOT_SHOOT_TORCHES))
+        if (!(livingEntity instanceof Player) || stack.is(Fireflight.Tags.Items.CANNOT_SHOOT_TORCHES))
             return 0f;
 
         if (stack.getItem() instanceof BowItem) {

@@ -2,8 +2,8 @@ package io.github.mortuusars.fireflight.event;
 
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
-import io.github.mortuusars.fireflight.TorchAmmoSelectionBehavior;
-import io.github.mortuusars.fireflight.TorchType;
+import io.github.mortuusars.fireflight.torch_shooting.TorchAmmoSelectionBehavior;
+import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -23,15 +23,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class CommonEvents {
-//    public static class Mod {
-//        @SubscribeEvent
-//        public static void commonSetup(FMLCommonSetupEvent event) {
-//            event.enqueueWork(() -> {
-//
-//            })
-//        }
-//    }
-
     public static class Forge {
         @SubscribeEvent
         public static void onGetProjectile(LivingGetProjectileEvent event) {

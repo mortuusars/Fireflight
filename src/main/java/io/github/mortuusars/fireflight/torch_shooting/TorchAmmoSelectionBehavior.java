@@ -1,4 +1,4 @@
-package io.github.mortuusars.fireflight;
+package io.github.mortuusars.fireflight.torch_shooting;
 
 public enum TorchAmmoSelectionBehavior {
     MAINHAND_OFFHAND,

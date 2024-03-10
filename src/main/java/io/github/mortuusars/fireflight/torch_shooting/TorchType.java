@@ -1,5 +1,6 @@
-package io.github.mortuusars.fireflight;
+package io.github.mortuusars.fireflight.torch_shooting;
 
+import io.github.mortuusars.fireflight.Fireflight;
 import net.minecraft.world.item.ItemStack;
 
 public enum TorchType {

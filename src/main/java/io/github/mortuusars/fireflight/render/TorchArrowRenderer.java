@@ -2,9 +2,8 @@ package io.github.mortuusars.fireflight.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.fireflight.Fireflight;
-import io.github.mortuusars.fireflight.TorchType;
+import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import io.github.mortuusars.fireflight.entity.TorchArrow;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
