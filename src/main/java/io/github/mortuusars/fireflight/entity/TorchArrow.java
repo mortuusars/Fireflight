@@ -41,13 +41,21 @@ public class TorchArrow extends AbstractArrow {
         super(pEntityType, pLevel);
     }
 
-    public TorchArrow(EntityType<? extends TorchArrow> entityType, Level level, LivingEntity shooter, ItemStack storedTorch) {
-        super(entityType, shooter, level);
-        this.storedTorch = storedTorch;
+    public TorchArrow(Level level, LivingEntity shooter, ItemStack storedTorch) {
+        this(Fireflight.Entities.TORCH_ARROW.get(), level, shooter, storedTorch);
     }
 
-    public TorchArrow(Level level, LivingEntity shooter, ItemStack storedTorch) {
-        super(Fireflight.Entities.TORCH_ARROW.get(), shooter, level);
+    public TorchArrow(Level level, double x, double y, double z, ItemStack storedTorch) {
+        this(Fireflight.Entities.TORCH_ARROW.get(), level, x, y, z, storedTorch);
+    }
+
+    protected TorchArrow(EntityType<? extends TorchArrow> entityType, Level level, LivingEntity shooter, ItemStack storedTorch) {
+        super(entityType, shooter, level);
+        this.storedTorch = storedTorch;
+
+    }
+    protected TorchArrow(EntityType<? extends AbstractArrow> entityType, Level level, double x, double y, double z, ItemStack storedTorch) {
+        super(entityType, x, y, z, level);
         this.storedTorch = storedTorch;
     }
 

@@ -33,6 +33,10 @@ public class SoulTorchArrow extends TorchArrow {
         super(Fireflight.Entities.SOUL_TORCH_ARROW.get(), level, shooter, storedTorch);
     }
 
+    public SoulTorchArrow(Level level, double x, double y, double z, ItemStack storedTorch) {
+        super(Fireflight.Entities.SOUL_TORCH_ARROW.get(), level, x, y, z, storedTorch);
+    }
+
     @Override
     protected void doPostHurtEffects(@NotNull LivingEntity targetEntity) {
         int seconds = Config.Common.SOUL_TORCH_WITHER_SECONDS.get();

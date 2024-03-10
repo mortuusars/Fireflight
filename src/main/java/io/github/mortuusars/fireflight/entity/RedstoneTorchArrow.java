@@ -33,6 +33,10 @@ public class RedstoneTorchArrow extends TorchArrow {
         super(Fireflight.Entities.REDSTONE_TORCH_ARROW.get(), level, shooter, storedTorch);
     }
 
+    public RedstoneTorchArrow(Level level, double x, double y, double z, ItemStack storedTorch) {
+        super(Fireflight.Entities.REDSTONE_TORCH_ARROW.get(), level, x, y, z, storedTorch);
+    }
+
     @Override
     protected void doPostHurtEffects(@NotNull LivingEntity targetEntity) {
         int seconds = Config.Common.REDSTONE_TORCH_SLOWNESS_SECONDS.get();

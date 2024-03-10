@@ -17,7 +17,7 @@ public class Config
         public static final ForgeConfigSpec.IntValue REDSTONE_TORCH_SLOWNESS_SECONDS;
         public static final ForgeConfigSpec.IntValue TORCH_IN_GROUND_ITEM_DROP_TIME;
 
-//        public static final ForgeConfigSpec.BooleanValue SHOOTING_TORCHES_DISPENSER;
+        public static final ForgeConfigSpec.BooleanValue SHOOTING_TORCHES_DISPENSER;
 
         static {
             ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -66,6 +66,9 @@ public class Config
                             "when stuck in a face of a block (torch wasn't placed). Default: " + inGroundItemDropTime)
                     .defineInRange("TorchProjectileStuckTime", inGroundItemDropTime, 0, Integer.MAX_VALUE);
 
+            SHOOTING_TORCHES_DISPENSER = builder
+                    .comment("Dispenser will shoot torches.")
+                    .define("DispenserShooting", true);
 
             SPEC = builder.build();
         }
