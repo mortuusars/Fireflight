@@ -144,7 +144,6 @@ public class TorchArrow extends AbstractArrow {
         boolean isSameItem = storedTorch.getItem() == blockStateAtPos.getBlock().asItem();
 
         if (!isInWater() && canPlaceTorchAtHitPos && !isSameItem) {
-
             Direction torchFacing = null;
 
             if (impactFace == Direction.DOWN) { // Search the nearest block that can hold a torch
@@ -171,6 +170,9 @@ public class TorchArrow extends AbstractArrow {
             else if (level.getBlockState(blockHitResult.getBlockPos())
                     .isFaceSturdy(level, blockHitResult.getBlockPos(), impactFace, impactFace == Direction.UP ? SupportType.CENTER : SupportType.FULL))
                 torchFacing = impactFace;
+            else if (level.getBlockState(blockPos.below())
+                    .isFaceSturdy(level, blockPos.below(), Direction.UP, SupportType.CENTER))
+                torchFacing = Direction.UP;
 
             if (torchFacing != null) {
                     try {
