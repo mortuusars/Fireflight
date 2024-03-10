@@ -11,6 +11,7 @@ public class Config
         public static final ForgeConfigSpec SPEC;
 
         public static final ForgeConfigSpec.BooleanValue RENDER_TORCH_OVERLAY;
+        public static final ForgeConfigSpec.BooleanValue TORCHES_TOOLTIP;
 
         static {
             ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -18,6 +19,10 @@ public class Config
             RENDER_TORCH_OVERLAY = builder
                     .comment("Render torch projectile on a Bow/Crossbow. It will look like a regular arrow otherwise. Default: true")
                     .define("RenderTorchOnWeapon", true);
+
+            TORCHES_TOOLTIP = builder
+                    .comment("Shootable torches will have a tooltip showing that they can be fired from Bow/Crossbow. Default: false")
+                    .define("TorchesTooltip", false);
 
             SPEC = builder.build();
         }

@@ -1,5 +1,7 @@
 {
-  "entity.fireflight.torch_arrow": "Torch",
-  "entity.fireflight.soul_torch_arrow": "Soul Torch",
-  "entity.fireflight.redstone_torch_arrow": "Redstone Torch"
+  "entity.fireflight.torch": "Torch",
+  "entity.fireflight.soul_torch": "Soul Torch",
+  "entity.fireflight.redstone_torch": "Redstone Torch",
+
+  "item.fireflight.torches.tooltip": "§7Can be fired from Bow or Crossbow"
 }

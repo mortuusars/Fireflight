@@ -40,8 +40,9 @@ public class Fireflight
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         Entities.register(modEventBus);
 
-        modEventBus.register(ClientEvents.class);
+        modEventBus.register(ClientEvents.Mod.class);
 
+        MinecraftForge.EVENT_BUS.register(ClientEvents.Forge.class);
         MinecraftForge.EVENT_BUS.register(CommonEvents.Forge.class);
     }
 
