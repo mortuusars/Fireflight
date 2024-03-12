@@ -32,6 +32,7 @@ public class Config
         public static final ForgeConfigSpec SPEC;
 
         public static final ForgeConfigSpec.EnumValue<TorchAmmoSelectionBehavior> AMMO_SELECTION_BEHAVIOR;
+        public static final ForgeConfigSpec.BooleanValue SNEAKING_PREVENTS_TORCH_SHOOTING;
         public static final ForgeConfigSpec.IntValue SHOOTING_TORCHES_DURABILITY_COST;
         public static final ForgeConfigSpec.DoubleValue TORCH_DAMAGE;
         public static final ForgeConfigSpec.IntValue TORCH_IGNITE_SECONDS;
@@ -59,6 +60,10 @@ public class Config
                             "HOTBAR_REVERSED: ie: Arrow in slot 9 will be chosen over a Torch in slot 1-8. And vise-versa. Useful when you carry torches in one of the first slots and don't want them to take priority when shooting.",
                             "REGULAR: Ammo will be chosen from left to right like usual. Hotbar, then 1-3 inventory rows.")
                     .defineEnum("TorchAmmoBehavior", ammoSelectionBehavior);
+
+            SNEAKING_PREVENTS_TORCH_SHOOTING = builder
+                    .comment("Sneaking will prevent selecting a torch as ammo. Default: true")
+                    .define("SneakingPreventsTorchShooting", true);
 
             SHOOTING_TORCHES_DURABILITY_COST = builder
                     .comment("Amount of durability loss per shot. Default: " + durabilityCost)

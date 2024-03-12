@@ -29,6 +29,9 @@ public class CommonEvents {
             if (!(event.getEntity() instanceof Player player))
                 return;
 
+            if (Config.Common.SNEAKING_PREVENTS_TORCH_SHOOTING.get() && player.isSecondaryUseActive())
+                return;
+
             ItemStack weapon = event.getProjectileWeaponItemStack();
             ItemStack projectile = event.getProjectileItemStack();
 
@@ -75,6 +78,11 @@ public class CommonEvents {
 
             // Select the torch from any slot since we don't have other projectiles:
             if (projectileSlot == -1) {
+                if (!player.isCreative() && weapon.getEnchantmentLevel(Enchantments.INFINITY_ARROWS) == 0) {
+                    // Player probably has a quiver or something.
+                    return;
+                }
+
                 for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
                     ItemStack stack = player.getInventory().getItem(i);
                     if (Fireflight.isShootableTorch(stack)) {
