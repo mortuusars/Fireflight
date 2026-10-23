@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "io.github.mortuusars.fireflight.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "plugin": "io.github.mortuusars.fireflight.fabric.FireflightMixinPlugin",
+  "client": [
+  ],
+  "mixins": [
+    "PlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
