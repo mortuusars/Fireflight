@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
 import io.github.mortuusars.fireflight.torch_shooting.TorchType;
-import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -17,7 +16,6 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -254,11 +252,13 @@ public class Torch extends AbstractArrow {
             return;
         }
 
-        if (inGround && random.nextInt(3) != 0) {
+        if (inGround && random.nextInt(4) != 0) {
+            return;
+        } else if (random.nextInt(2) != 0) {
             return;
         }
 
-        if (level.random.nextFloat() >= 0.7) {
+        if (level.random.nextFloat() >= 0.5) {
             level.addAlwaysVisibleParticle(ParticleTypes.FLAME, true, this.getX(), this.getY(), this.getZ(), 0.0D, 0.03D, 0.0D);
         } else {
             level.addAlwaysVisibleParticle(ParticleTypes.SMALL_FLAME, true, this.getX(), this.getY(), this.getZ(), 0.0D, 0.03D, 0.0D);
@@ -285,7 +285,7 @@ public class Torch extends AbstractArrow {
         Vec3 faceOffset = new Vec3(impactFaceNormal.getX() / 3D, impactFaceNormal.getY() / 3D, impactFaceNormal.getZ() / 3D);
         Vec3 pos = new Vec3(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5).add(faceOffset);
 
-        int particles = torchWasPlaced ? 14 : 5;
+        int particles = torchWasPlaced ? 10 : 5;
 
         for (int i = 0; i < particles; i++) {
             double xo = impactFaceNormal.getX() * 0.15D + (level.random.nextDouble() * 0.2 - 0.1);

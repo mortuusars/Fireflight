@@ -77,7 +77,7 @@ public class Config {
 
                 TORCH_VELOCITY_MULTIPLIER = builder
                       .comment("Velocity multiplier of the torch projectile. 1.0 - same as arrow.")
-                      .defineInRange("velocity_multiplier", 0.6, 0.01, 10.0);
+                      .defineInRange("velocity_multiplier", 0.5, 0.01, 10.0);
 
                 TORCH_DAMAGE = builder
                       .comment("Base damage of the torch projectile.")
@@ -100,7 +100,7 @@ public class Config {
 
                 SOUL_TORCH_VELOCITY_MULTIPLIER = builder
                       .comment("Velocity multiplier of the soul torch projectile. 1.0 - same as arrow.")
-                      .defineInRange("velocity_multiplier", 0.6, 0.01, 10.0);
+                      .defineInRange("velocity_multiplier", 0.5, 0.01, 10.0);
 
                 SOUL_TORCH_DAMAGE = builder
                       .comment("Base damage of the soul torch projectile.")
@@ -123,7 +123,7 @@ public class Config {
 
                 REDSTONE_TORCH_VELOCITY_MULTIPLIER = builder
                       .comment("Velocity multiplier of the redstone torch projectile. 1.0 - same as arrow.")
-                      .defineInRange("velocity_multiplier", 0.8, 0.01, 10.0);
+                      .defineInRange("velocity_multiplier", 0.7, 0.01, 10.0);
 
                 REDSTONE_TORCH_DAMAGE = builder
                       .comment("Base damage of the redstone torch projectile.")

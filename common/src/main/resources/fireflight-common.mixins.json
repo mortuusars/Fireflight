@@ -8,7 +8,6 @@
     "ItemRendererMixin"
   ],
   "mixins": [
-    "CrossbowItemMixin",
     "DispenserBlockMixin",
     "ProjectileWeaponItemMixin"
   ],

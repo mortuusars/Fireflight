@@ -69,20 +69,4 @@ public class LayeredBakedModel implements BakedModel {
     public @NotNull ItemTransforms getTransforms() {
         return layers.getFirst().getTransforms();
     }
-
-//    public static class Cache {
-//        private static final Int2ObjectMap<BakedModel> cache = new Int2ObjectOpenHashMap<>(256);
-//
-//        public static void add(int key, BakedModel model) {
-//            cache.put(key, model);
-//        }
-//
-//        public static @Nullable BakedModel get(int key) {
-//            return cache.get(key);
-//        }
-//
-//        public static void clear() {
-//            cache.clear();
-//        }
-//    }
 }

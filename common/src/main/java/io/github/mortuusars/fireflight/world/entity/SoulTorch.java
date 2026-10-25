@@ -63,7 +63,7 @@ public class SoulTorch extends Torch {
             return;
         }
 
-        if  (inGround && random.nextInt(3) != 0) {
+        if (inGround && random.nextInt(4) != 0) {
             return;
         }
 
@@ -91,7 +91,7 @@ public class SoulTorch extends Torch {
         Vec3 faceOffset = new Vec3(impactFaceNormal.getX() / 3D, impactFaceNormal.getY() / 3D, impactFaceNormal.getZ() / 3D);
         Vec3 pos = new Vec3(blockPos.getX() + 0.5, blockPos.getY() + 0.5, blockPos.getZ() + 0.5).add(faceOffset);
 
-        int particles = torchWasPlaced ? 14 : 5;
+        int particles = torchWasPlaced ? 10 : 5;
 
         for (int i = 0; i < particles; i++) {
             double xo = impactFaceNormal.getX() * 0.15D + (level.random.nextDouble() * 0.2 - 0.1);

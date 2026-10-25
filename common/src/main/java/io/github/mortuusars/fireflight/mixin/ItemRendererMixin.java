@@ -64,8 +64,6 @@ public class ItemRendererMixin {
         BakedModel originalModel = cir.getReturnValue();
         LayeredBakedModel layeredModel = new LayeredBakedModel(List.of(originalModel, overlayModel));
 
-        // Not using LayeredBakedModel cache here. It's probably not necessary.
-
         cir.setReturnValue(layeredModel);
     }
 }
