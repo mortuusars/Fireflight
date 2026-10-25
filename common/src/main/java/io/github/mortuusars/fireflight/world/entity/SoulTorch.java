@@ -1,4 +1,4 @@
-package io.github.mortuusars.fireflight.entity;
+package io.github.mortuusars.fireflight.world.entity;
 
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
@@ -39,10 +39,10 @@ public class SoulTorch extends Torch {
 
     @Override
     protected void doPostHurtEffects(@NotNull LivingEntity targetEntity) {
-        int seconds = Config.Common.SOUL_TORCH_WITHER_SECONDS.get();
-        if (seconds > 0) {
-            MobEffectInstance mobeffectinstance = new MobEffectInstance(MobEffects.WITHER, seconds * 20, 0);
-            targetEntity.addEffect(mobeffectinstance, this.getEffectSource());
+        int ticks = Config.Server.SOUL_TORCH_WITHER_EFFECT_DURATION.get();
+        if (ticks > 0) {
+            MobEffectInstance mobeffectinstance = new MobEffectInstance(MobEffects.WITHER, ticks, 0);
+            targetEntity.addEffect(mobeffectinstance, getEffectSource());
         }
     }
 

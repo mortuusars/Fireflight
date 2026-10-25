@@ -1,8 +1,8 @@
 package io.github.mortuusars.fireflight;
 
-import io.github.mortuusars.fireflight.entity.RedstoneTorch;
-import io.github.mortuusars.fireflight.entity.SoulTorch;
-import io.github.mortuusars.fireflight.entity.Torch;
+import io.github.mortuusars.fireflight.world.entity.RedstoneTorch;
+import io.github.mortuusars.fireflight.world.entity.SoulTorch;
+import io.github.mortuusars.fireflight.world.entity.Torch;
 import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import io.github.mortuusars.mortaar.Register;
 import io.github.mortuusars.mortaar.Registrar;

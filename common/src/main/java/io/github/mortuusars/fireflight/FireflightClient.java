@@ -38,14 +38,14 @@ public class FireflightClient {
             if (entity instanceof Player player && !stack.is(Fireflight.Tags.Items.CANNOT_SHOOT_TORCHES)) {
                 if (stack.getItem() instanceof BowItem) {
                     if (player.isUsingItem()) {
-                        return TorchType.getFromStack(player.getProjectile(stack)).getFloatValue();
+                        return TorchType.getFromStack(player.getProjectile(stack)).getModelOverrideValue();
                     }
                     return 0f;
                 }
 
                 if (stack.get(DataComponents.CHARGED_PROJECTILES) instanceof ChargedProjectiles projectiles) {
                     for (ItemStack projectile : projectiles.getItems()) {
-                        return TorchType.getFromStack(projectile).getFloatValue();
+                        return TorchType.getFromStack(projectile).getModelOverrideValue();
                     }
                 }
             }

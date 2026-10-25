@@ -3,5 +3,25 @@
   "entity.fireflight.soul_torch": "Soul Torch",
   "entity.fireflight.redstone_torch": "Redstone Torch",
 
-  "item.fireflight.torches.tooltip": "§7Can be fired from Bow or Crossbow"
+  "fireflight.configuration.offhand_torch_selection": "Offhand Torch Selection",
+  "fireflight.configuration.inventory_torch_selection_when_standing": "Inventory Torch Selection: Standing",
+  "fireflight.configuration.inventory_torch_selection_when_sneaking": "Inventory Torch Selection: Sneaking",
+
+  "fireflight.configuration.torch_projectile_stuck_drop_time": "Stuck Projectile Drop Time",
+  "fireflight.configuration.dispenser_shoots_torches": "Dispenser Shoots Torches",
+
+  "fireflight.configuration.velocity_multiplier": "Velocity Multiplier",
+  "fireflight.configuration.damage": "Damage",
+  "fireflight.configuration.weapon_durability_cost": "Weapon Durability Cost",
+
+  "fireflight.configuration.torch": "Torch",
+  "fireflight.configuration.ignite_effect_duration": "Ignite Effect Duration",
+
+  "fireflight.configuration.soul_torch": "Soul Torch",
+  "fireflight.configuration.wither_effect_duration": "Wither Effect Duration",
+
+  "fireflight.configuration.redstone_torch": "Redstone Torch",
+  "fireflight.configuration.slowness_effect_duration": "Slowness Effect Duration",
+
+  "fireflight.configuration.render_torch_on_weapon": "Render Torch On Weapon"
 }

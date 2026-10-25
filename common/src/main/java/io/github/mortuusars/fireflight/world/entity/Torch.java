@@ -1,8 +1,10 @@
-package io.github.mortuusars.fireflight.entity;
+package io.github.mortuusars.fireflight.world.entity;
 
 import com.mojang.logging.LogUtils;
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
+import io.github.mortuusars.fireflight.torch_shooting.TorchType;
+import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -33,7 +35,7 @@ import javax.naming.OperationNotSupportedException;
 
 public class Torch extends AbstractArrow {
     protected boolean torchWasPlaced;
-    protected int inGroundItemDropTimer = Config.Common.TORCH_IN_GROUND_ITEM_DROP_TIME.get();
+    protected int inGroundItemDropTimer = Config.Server.TORCH_PROJECTILE_STUCK_DROP_TIME.get();
 
     public Torch(EntityType<? extends Torch> entityType, Level level) {
         super(entityType, level);
@@ -108,19 +110,21 @@ public class Torch extends AbstractArrow {
 
     @Override
     public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
-        // Crossbow sets pickup to CREATIVE ONLY for additional projectiles with multishot.
-        // Since we consume 3 torches instead of 1 when loading - we should be able to pick up all projectiles.
-        if (getOwner() instanceof Player player && !player.isCreative())
-            this.pickup = Pickup.ALLOWED; // Hopefully this wouldn't cause a dupe of some sort.
+        // Pickup is controlled by INTANGIBLE_PROJECTILE in 1.21, which we remove when consuming ammo.
+        // if (getOwner() instanceof Player player && !player.isCreative()) {
+        //     this.pickup = Pickup.ALLOWED; // Hopefully this wouldn't cause a dupe of some sort.
+        // }
+
+        velocity *= TorchType.mapOrDefault(getPickupItem(), type -> type.getVelocityMultiplier().get().floatValue(), 1.0f);
 
         super.shoot(x, y, z, velocity, inaccuracy);
     }
 
     @Override
     protected void doPostHurtEffects(@NotNull LivingEntity targetEntity) {
-        int seconds = Config.Common.TORCH_IGNITE_SECONDS.get();
-        if (seconds > 0) {
-            targetEntity.igniteForSeconds(seconds);
+        int ticks = Config.Server.TORCH_IGNITE_EFFECT_DURATION.get();
+        if (ticks > 0) {
+            targetEntity.igniteForTicks(ticks);
         }
     }
 
@@ -312,7 +316,7 @@ public class Torch extends AbstractArrow {
     @Override
     public void addAdditionalSaveData(@NotNull CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.putBoolean("TorchWasPlaced", true);
+        if (torchWasPlaced) tag.putBoolean("TorchWasPlaced", true);
         tag.putInt("InGroundItemDropTimer", inGroundItemDropTimer);
     }
 

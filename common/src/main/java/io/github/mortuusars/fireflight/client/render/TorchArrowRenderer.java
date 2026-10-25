@@ -1,10 +1,8 @@
-package io.github.mortuusars.fireflight.render;
+package io.github.mortuusars.fireflight.client.render;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.fireflight.Fireflight;
 import io.github.mortuusars.fireflight.torch_shooting.TorchType;
-import io.github.mortuusars.fireflight.entity.Torch;
-import net.minecraft.client.renderer.MultiBufferSource;
+import io.github.mortuusars.fireflight.world.entity.Torch;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -24,15 +22,9 @@ public class TorchArrowRenderer extends ArrowRenderer<Torch> {
 
     public @NotNull ResourceLocation getTextureLocation(@NotNull Torch entity) {
         return switch (type) {
-            case NONE, TORCH -> TORCH_ARROW_LOCATION;
-            case SOUL -> SOUL_TORCH_ARROW_LOCATION;
-            case REDSTONE -> REDSTONE_TORCH_ARROW_LOCATION;
+            case TORCH -> TORCH_ARROW_LOCATION;
+            case SOUL_TORCH -> SOUL_TORCH_ARROW_LOCATION;
+            case REDSTONE_TORCH -> REDSTONE_TORCH_ARROW_LOCATION;
         };
-    }
-
-    @Override
-    public void render(@NotNull Torch entity, float entityYaw, float partialTicks,
-                       @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 }

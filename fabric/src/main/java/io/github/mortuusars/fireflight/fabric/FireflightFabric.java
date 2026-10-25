@@ -11,7 +11,7 @@ public class FireflightFabric implements ModInitializer {
     public void onInitialize() {
         Fireflight.init();
 
-        NeoForgeConfigRegistry.INSTANCE.register(Fireflight.ID, ModConfig.Type.COMMON, Config.Common.SPEC);
+        NeoForgeConfigRegistry.INSTANCE.register(Fireflight.ID, ModConfig.Type.SERVER, Config.Server.SPEC);
         NeoForgeConfigRegistry.INSTANCE.register(Fireflight.ID, ModConfig.Type.CLIENT, Config.Client.SPEC);
 
 //        CommonEvents.commonSetup();

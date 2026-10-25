@@ -1,8 +1,6 @@
-package io.github.mortuusars.fireflight.render;
+package io.github.mortuusars.fireflight.client.render;
 
 import com.google.common.base.Preconditions;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -24,18 +22,6 @@ public class LayeredBakedModel implements BakedModel {
         Preconditions.checkArgument(!layers.isEmpty(), "Should have at least one model.");
         this.layers = layers;
     }
-
-//    @Override
-//    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType renderType) {
-//        List<BakedQuad> quads = new ArrayList<>();
-//
-//        for (BakedModel layer : layers) {
-//            List<BakedQuad> layerQuads = layer.getQuads(state, side, rand, data, renderType);
-//            quads.addAll(layerQuads);
-//        }
-//
-//        return quads;
-//    }
 
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction direction, @NotNull RandomSource random) {
@@ -84,19 +70,19 @@ public class LayeredBakedModel implements BakedModel {
         return layers.getFirst().getTransforms();
     }
 
-    public static class Cache {
-        private static final Int2ObjectMap<BakedModel> cache = new Int2ObjectOpenHashMap<>(256);
-
-        public static void add(int key, BakedModel model) {
-            cache.put(key, model);
-        }
-
-        public static @Nullable BakedModel get(int key) {
-            return cache.get(key);
-        }
-
-        public static void clear() {
-            cache.clear();
-        }
-    }
+//    public static class Cache {
+//        private static final Int2ObjectMap<BakedModel> cache = new Int2ObjectOpenHashMap<>(256);
+//
+//        public static void add(int key, BakedModel model) {
+//            cache.put(key, model);
+//        }
+//
+//        public static @Nullable BakedModel get(int key) {
+//            return cache.get(key);
+//        }
+//
+//        public static void clear() {
+//            cache.clear();
+//        }
+//    }
 }

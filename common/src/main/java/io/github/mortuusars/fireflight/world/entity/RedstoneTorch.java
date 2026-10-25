@@ -1,4 +1,4 @@
-package io.github.mortuusars.fireflight.entity;
+package io.github.mortuusars.fireflight.world.entity;
 
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
@@ -39,9 +39,9 @@ public class RedstoneTorch extends Torch {
 
     @Override
     protected void doPostHurtEffects(@NotNull LivingEntity targetEntity) {
-        int seconds = Config.Common.REDSTONE_TORCH_SLOWNESS_SECONDS.get();
-        if (seconds > 0) {
-            MobEffectInstance mobeffectinstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, 0);
+        int ticks = Config.Server.REDSTONE_TORCH_SLOWNESS_EFFECT_DURATION.get();
+        if (ticks > 0) {
+            MobEffectInstance mobeffectinstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 0);
             targetEntity.addEffect(mobeffectinstance, this.getEffectSource());
         }
     }
