@@ -1,11 +1,13 @@
 package io.github.mortuusars.fireflight;
 
+import io.github.mortuusars.fireflight.advancements.PlaceTorchFromProjectileTrigger;
 import io.github.mortuusars.fireflight.world.entity.RedstoneTorch;
 import io.github.mortuusars.fireflight.world.entity.SoulTorch;
 import io.github.mortuusars.fireflight.world.entity.Torch;
 import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import io.github.mortuusars.mortaar.Register;
 import io.github.mortuusars.mortaar.Registrar;
+import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -23,6 +25,7 @@ public class Fireflight {
 
     public static void init() {
         EntityTypes.init();
+        CriteriaTriggers.init();
     }
 
     public static ResourceLocation resource(String path) {
@@ -48,6 +51,14 @@ public class Fireflight {
               RedstoneTorch::new, MobCategory.MISC, true, builder -> builder
                     .sized(0.5F, 0.5F)
                     .fireImmune());
+
+        public static void init() {
+        }
+    }
+
+    public static class CriteriaTriggers {
+        public static Supplier<PlaceTorchFromProjectileTrigger> PLACE_TORCH_FROM_PROJECTILE =
+              REGISTRAR.criterionTrigger("place_torch_from_projectile", PlaceTorchFromProjectileTrigger::new);
 
         public static void init() {
         }

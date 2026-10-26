@@ -1,7 +1,9 @@
 package io.github.mortuusars.fireflight.torch_shooting;
 
+import com.mojang.serialization.Codec;
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,29 +11,33 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public enum TorchType {
-    TORCH(
+public enum TorchType implements StringRepresentable {
+    TORCH("torch",
           Config.Server.TORCH_VELOCITY_MULTIPLIER,
           Config.Server.TORCH_DAMAGE,
           Config.Server.TORCH_WEAPON_DURABILITY_COST,
           0.1F),
-    SOUL_TORCH(
+    SOUL_TORCH("soul_torch",
           Config.Server.SOUL_TORCH_VELOCITY_MULTIPLIER,
           Config.Server.SOUL_TORCH_DAMAGE,
           Config.Server.SOUL_TORCH_WEAPON_DURABILITY_COST,
           0.2F),
-    REDSTONE_TORCH(
+    REDSTONE_TORCH("redstone_torch",
           Config.Server.REDSTONE_TORCH_VELOCITY_MULTIPLIER,
           Config.Server.REDSTONE_TORCH_DAMAGE,
           Config.Server.REDSTONE_TORCH_WEAPON_DURABILITY_COST,
           0.3F);
 
+    public static final Codec<TorchType> CODEC = StringRepresentable.fromEnum(TorchType::values);
+
+    private final String name;
     private final Supplier<Double> velocityMultiplier;
     private final Supplier<Double> damage;
     private final Supplier<Integer> weaponDurabilityCost;
     private final float modelOverrideValue;
 
-    TorchType(Supplier<Double> velocityMultiplier, Supplier<Double> damage, Supplier<Integer> weaponDurabilityCost, float modelOverrideValue) {
+    TorchType(String name, Supplier<Double> velocityMultiplier, Supplier<Double> damage, Supplier<Integer> weaponDurabilityCost, float modelOverrideValue) {
+        this.name = name;
         this.velocityMultiplier = velocityMultiplier;
         this.damage = damage;
         this.weaponDurabilityCost = weaponDurabilityCost;
@@ -93,5 +99,10 @@ public enum TorchType {
             return mapper.apply(type);
         }
         return defaultValueGetter.get();
+    }
+
+    @Override
+    public @NotNull String getSerializedName() {
+        return name;
     }
 }

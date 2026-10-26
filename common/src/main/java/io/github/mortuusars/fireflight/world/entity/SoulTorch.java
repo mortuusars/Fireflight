@@ -2,6 +2,7 @@ package io.github.mortuusars.fireflight.world.entity;
 
 import io.github.mortuusars.fireflight.Config;
 import io.github.mortuusars.fireflight.Fireflight;
+import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -35,6 +36,10 @@ public class SoulTorch extends Torch {
 
     public SoulTorch(Level level, double x, double y, double z, ItemStack pickupStack) {
         super(Fireflight.EntityTypes.SOUL_TORCH.get(), level, x, y, z, pickupStack);
+    }
+
+    public TorchType getTorchType() {
+        return TorchType.SOUL_TORCH;
     }
 
     @Override

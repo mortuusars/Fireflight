@@ -10,6 +10,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Containers;
@@ -28,10 +29,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.naming.OperationNotSupportedException;
 
 public class Torch extends AbstractArrow {
+    protected @Nullable Vec3 shootPosition;
     protected boolean torchWasPlaced;
     protected int inGroundItemDropTimer = Config.Server.TORCH_PROJECTILE_STUCK_DROP_TIME.get();
 
@@ -53,6 +56,14 @@ public class Torch extends AbstractArrow {
 
     protected Torch(EntityType<? extends AbstractArrow> entityType, Level level, double x, double y, double z, ItemStack pickupStack) {
         super(entityType, x, y, z, level, pickupStack, null);
+    }
+
+    public TorchType getTorchType() {
+        return TorchType.TORCH;
+    }
+
+    public @Nullable Vec3 getShootPosition() {
+        return shootPosition;
     }
 
     @Override
@@ -116,6 +127,8 @@ public class Torch extends AbstractArrow {
         velocity *= TorchType.mapOrDefault(getPickupItem(), type -> type.getVelocityMultiplier().get().floatValue(), 1.0f);
 
         super.shoot(x, y, z, velocity, inaccuracy);
+
+        shootPosition = position();
     }
 
     @Override
@@ -179,6 +192,13 @@ public class Torch extends AbstractArrow {
                 } catch (OperationNotSupportedException ignored) {
                 }
             }
+        }
+
+        if (torchWasPlaced && shootPosition != null && getOwner() instanceof ServerPlayer player) {
+            LogUtils.getLogger().info("Light: {}, Distance: {}",
+                  level().getMaxLocalRawBrightness(blockPos),
+                  shootPosition.distanceTo(blockHitResult.getLocation()));
+            Fireflight.CriteriaTriggers.PLACE_TORCH_FROM_PROJECTILE.get().trigger(player, this);
         }
 
         if (!torchWasPlaced && impactFace != Direction.UP) {
@@ -316,6 +336,13 @@ public class Torch extends AbstractArrow {
     @Override
     public void addAdditionalSaveData(@NotNull CompoundTag tag) {
         super.addAdditionalSaveData(tag);
+
+        if (shootPosition != null) {
+            tag.putDouble("ShootPositionX", shootPosition.x());
+            tag.putDouble("ShootPositionY", shootPosition.y());
+            tag.putDouble("ShootPositionZ", shootPosition.z());
+        }
+
         if (torchWasPlaced) tag.putBoolean("TorchWasPlaced", true);
         tag.putInt("InGroundItemDropTimer", inGroundItemDropTimer);
     }
@@ -323,6 +350,19 @@ public class Torch extends AbstractArrow {
     @Override
     public void readAdditionalSaveData(@NotNull CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+
+        if (tag.contains("ShootPositionX")
+              && tag.contains("ShootPositionY")
+              && tag.contains("ShootPositionZ")) {
+            shootPosition = new Vec3(
+                  tag.getDouble("ShootPositionX"),
+                  tag.getDouble("ShootPositionY"),
+                  tag.getDouble("ShootPositionZ")
+            );
+        } else {
+            shootPosition = null;
+        }
+
         torchWasPlaced = tag.getBoolean("TorchWasPlaced");
         inGroundItemDropTimer = tag.getInt("InGroundItemDropTimer");
     }

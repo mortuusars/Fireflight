@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:adventure/shoot_arrow",
+  "criteria": {
+    "shoot_torch": {
+      "conditions": {
+        "distance": {
+          "absolute": {
+            "min": 50.0
+          }
+        },
+        "place_location": {
+          "light": {
+            "light": {
+              "max": 4
+            }
+          }
+        },
+        "torch_type": "torch"
+      },
+      "trigger": "fireflight:place_torch_from_projectile"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.fireflight.shoot_torch.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:torch"
+    },
+    "title": {
+      "translate": "advancement.fireflight.shoot_torch.title"
+    }
+  },
+  "requirements": [
+    [
+      "shoot_torch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
