@@ -8,6 +8,8 @@
     "client.ItemRendererMixin"
   ],
   "mixins": [
+    "shoot_sound.BowItemMixin",
+    "shoot_sound.CrossbowItemMixin",
     "DispenserBlockMixin",
     "ProjectileWeaponItemMixin"
   ],
