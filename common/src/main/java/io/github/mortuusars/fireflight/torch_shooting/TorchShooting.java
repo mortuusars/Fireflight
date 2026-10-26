@@ -5,7 +5,6 @@ import io.github.mortuusars.fireflight.Fireflight;
 import io.github.mortuusars.fireflight.world.entity.RedstoneTorch;
 import io.github.mortuusars.fireflight.world.entity.SoulTorch;
 import io.github.mortuusars.fireflight.world.entity.Torch;
-import net.minecraft.Optionull;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -45,7 +44,19 @@ public class TorchShooting {
               ? Config.Server.INVENTORY_TORCH_SELECTION_WHEN_SNEAKING.get()
               : Config.Server.INVENTORY_TORCH_SELECTION_WHEN_STANDING.get();
 
-        return applyTorchSelection(selection, player, weaponStack, weaponItem, original);
+        Predicate<ItemStack> predicate = applyTorchSelection(selection, player, weaponStack, weaponItem, original);
+
+        // Fixes not being able to shoot when started using bow while sneaking and then stopped sneaking while no other ammo is in inventory
+        if (!player.isSecondaryUseActive()
+              && player.isUsingItem()
+              && Config.Server.INVENTORY_TORCH_SELECTION_WHEN_STANDING.get() == InventoryTorchSelection.IGNORE_TORCHES
+              && Config.Server.INVENTORY_TORCH_SELECTION_WHEN_SNEAKING.get() != InventoryTorchSelection.IGNORE_TORCHES
+              && !player.getInventory().contains(original)
+              && player.getInventory().contains(Fireflight::isShootableTorch)) {
+            return predicate.or(Fireflight::isShootableTorch);
+        }
+
+        return predicate;
     }
 
     private static Predicate<ItemStack> applyTorchSelection(InventoryTorchSelection selection,
@@ -54,8 +65,8 @@ public class TorchShooting {
         return switch (selection) {
             case ONLY_TORCHES -> Fireflight::isShootableTorch;
             case PRIORITIZE_TORCHES -> player.getInventory().contains(Fireflight::isShootableTorch)
-                  ? Fireflight::isShootableTorch
-                  : original;
+                      ? Fireflight::isShootableTorch
+                      : original;
             case INCLUDE_TORCHES -> original.or(Fireflight::isShootableTorch);
             case IGNORE_TORCHES -> original;
         };

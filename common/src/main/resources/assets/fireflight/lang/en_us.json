@@ -26,5 +26,6 @@
   "fireflight.configuration.redstone_torch": "Redstone Torch",
   "fireflight.configuration.slowness_effect_duration": "Slowness Effect Duration",
 
-  "fireflight.configuration.render_torch_on_weapon": "Render Torch On Weapon"
+  "fireflight.configuration.render_torch": "Render Torch",
+  "fireflight.configuration.render_torch_as_overlay": "Render Torch As Overlay"
 }

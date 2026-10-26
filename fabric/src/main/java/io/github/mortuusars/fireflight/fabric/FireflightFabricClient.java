@@ -21,9 +21,10 @@ public class FireflightFabricClient implements ClientModInitializer {
         EntityRendererRegistry.register(Fireflight.EntityTypes.SOUL_TORCH.get(), context -> new TorchArrowRenderer(context, TorchType.SOUL_TORCH));
         EntityRendererRegistry.register(Fireflight.EntityTypes.REDSTONE_TORCH.get(), context -> new TorchArrowRenderer(context, TorchType.REDSTONE_TORCH));
 
-        ModelLoadingPlugin.register(context -> context.addModels(
-              FireflightClient.Models.BOW_OVERLAY.id(),
-              FireflightClient.Models.CROSSBOW_OVERLAY.id()
-        ));
+//        ModelLoadingPlugin.register(context -> context.addModels(
+//              FireflightClient.Models.BOW_FULL.id(),
+//              FireflightClient.Models.BOW_OVERLAY.id(),
+//              FireflightClient.Models.CROSSBOW_OVERLAY.id()
+//        ));
     }
 }

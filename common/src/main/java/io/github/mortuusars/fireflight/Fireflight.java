@@ -7,7 +7,6 @@ import io.github.mortuusars.fireflight.world.entity.Torch;
 import io.github.mortuusars.fireflight.torch_shooting.TorchType;
 import io.github.mortuusars.mortaar.Register;
 import io.github.mortuusars.mortaar.Registrar;
-import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

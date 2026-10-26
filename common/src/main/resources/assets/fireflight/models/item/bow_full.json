@@ -1,0 +1,79 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "minecraft:item/bow"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1,
+        "fireflight:torch_type": 0.1
+      },
+      "model": "fireflight:item/bow/full/torch/pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65,
+        "fireflight:torch_type": 0.1
+      },
+      "model": "fireflight:item/bow/full/torch/pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9,
+        "fireflight:torch_type": 0.1
+      },
+      "model": "fireflight:item/bow/full/torch/pulling_2"
+    },
+
+    {
+      "predicate": {
+        "pulling": 1,
+        "fireflight:torch_type": 0.2
+      },
+      "model": "fireflight:item/bow/full/soul_torch/pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65,
+        "fireflight:torch_type": 0.2
+      },
+      "model": "fireflight:item/bow/full/soul_torch/pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9,
+        "fireflight:torch_type": 0.2
+      },
+      "model": "fireflight:item/bow/full/soul_torch/pulling_2"
+    },
+
+    {
+      "predicate": {
+        "pulling": 1,
+        "fireflight:torch_type": 0.3
+      },
+      "model": "fireflight:item/bow/full/redstone_torch/pulling_0"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.65,
+        "fireflight:torch_type": 0.3
+      },
+      "model": "fireflight:item/bow/full/redstone_torch/pulling_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.9,
+        "fireflight:torch_type": 0.3
+      },
+      "model": "fireflight:item/bow/full/redstone_torch/pulling_2"
+    }
+  ]
+}

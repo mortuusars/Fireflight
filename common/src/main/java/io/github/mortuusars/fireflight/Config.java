@@ -69,7 +69,8 @@ public class Config {
                   .defineInRange("torch_projectile_stuck_drop_time", 400, 0, Integer.MAX_VALUE);
 
             DISPENSER_SHOOTS_TORCHES = builder
-                  .comment("Dispenser will shoot torches. Default: true")
+                  .comment("Dispenser will shoot torches.",
+                        "Default: true")
                   .define("dispenser_shoots_torches", true);
 
             {
@@ -148,14 +149,22 @@ public class Config {
     public static class Client {
         public static final ModConfigSpec SPEC;
 
-        public static final ModConfigSpec.BooleanValue RENDER_TORCH_OVERLAY;
+        public static final ModConfigSpec.BooleanValue RENDER_TORCH;
+        public static final ModConfigSpec.BooleanValue RENDER_TORCH_AS_OVERLAY;
 
         static {
             ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
-            RENDER_TORCH_OVERLAY = builder
-                  .comment("Render torch projectile on a Bow/Crossbow. It will look like a regular arrow otherwise. Default: true")
-                  .define("render_torch_on_weapon", true);
+            RENDER_TORCH = builder
+                  .comment("Render torch projectile on a Bow/Crossbow. It will look like a regular arrow otherwise.",
+                        "Default: true")
+                  .define("render_torch", true);
+
+            RENDER_TORCH_AS_OVERLAY = builder
+                  .comment("Render torch as overlay on the bow model instead of a full replacement.",
+                        "Can improve compatibility with resourcepacks that change bow model, but may introduce some flickering (z-fighting) on item model in hand.",
+                        "Default: false")
+                  .define("render_torch_as_overlay", false);
 
             SPEC = builder.build();
         }

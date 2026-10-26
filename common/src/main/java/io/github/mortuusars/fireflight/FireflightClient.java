@@ -1,6 +1,7 @@
 package io.github.mortuusars.fireflight;
 
 import io.github.mortuusars.fireflight.torch_shooting.TorchType;
+import io.github.mortuusars.mortaar.Platform;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -15,13 +16,20 @@ import net.minecraft.world.item.component.ChargedProjectiles;
 public class FireflightClient {
     public static void init() {
         ItemModelOverrides.register();
+        Models.init();
     }
 
     public static class Models {
+        public static final ModelResourceLocation BOW_FULL =
+              Platform.Client.registerCustomModel(Fireflight.resource("item/bow_full"));
         public static final ModelResourceLocation BOW_OVERLAY =
-              new ModelResourceLocation(Fireflight.resource("item/bow_overlay"), "standalone");
+              Platform.Client.registerCustomModel(Fireflight.resource("item/bow_overlay"));
         public static final ModelResourceLocation CROSSBOW_OVERLAY =
-              new ModelResourceLocation(Fireflight.resource("item/crossbow_overlay"), "standalone");
+              Platform.Client.registerCustomModel(Fireflight.resource("item/crossbow_overlay"));
+
+        public static void init() {
+
+        }
     }
 
     public static class ItemModelOverrides {
@@ -38,14 +46,13 @@ public class FireflightClient {
             if (entity instanceof Player player && !stack.is(Fireflight.Tags.Items.CANNOT_SHOOT_TORCHES)) {
                 if (stack.getItem() instanceof BowItem) {
                     if (player.isUsingItem()) {
-                        return TorchType.getFromStack(player.getProjectile(stack)).getModelOverrideValue();
+                        return TorchType.mapOrDefault(player.getProjectile(stack), TorchType::getModelOverrideValue, 0f);
                     }
-                    return 0f;
                 }
 
                 if (stack.get(DataComponents.CHARGED_PROJECTILES) instanceof ChargedProjectiles projectiles) {
                     for (ItemStack projectile : projectiles.getItems()) {
-                        return TorchType.getFromStack(projectile).getModelOverrideValue();
+                        return TorchType.mapOrDefault(projectile, TorchType::getModelOverrideValue, 0f);
                     }
                 }
             }

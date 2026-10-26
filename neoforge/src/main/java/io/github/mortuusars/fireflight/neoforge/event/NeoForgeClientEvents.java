@@ -25,9 +25,10 @@ public class NeoForgeClientEvents {
         event.registerEntityRenderer(Fireflight.EntityTypes.REDSTONE_TORCH.get(), context -> new TorchArrowRenderer(context, TorchType.REDSTONE_TORCH));
     }
 
-    @SubscribeEvent
-    public static void registerModels(ModelEvent.RegisterAdditional event) {
-        event.register(FireflightClient.Models.BOW_OVERLAY);
-        event.register(FireflightClient.Models.CROSSBOW_OVERLAY);
-    }
+//    @SubscribeEvent
+//    public static void registerModels(ModelEvent.RegisterAdditional event) {
+//        event.register(FireflightClient.Models.BOW_FULL);
+//        event.register(FireflightClient.Models.BOW_OVERLAY);
+//        event.register(FireflightClient.Models.CROSSBOW_OVERLAY);
+//    }
 }

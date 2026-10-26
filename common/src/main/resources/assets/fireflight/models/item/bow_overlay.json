@@ -9,7 +9,7 @@
         "pulling": 1,
         "fireflight:torch_type": 0.1
       },
-      "model": "fireflight:item/bow/torch/pulling_0"
+      "model": "fireflight:item/bow/overlay/torch/pulling_0"
     },
     {
       "predicate": {
@@ -17,7 +17,7 @@
         "pull": 0.65,
         "fireflight:torch_type": 0.1
       },
-      "model": "fireflight:item/bow/torch/pulling_1"
+      "model": "fireflight:item/bow/overlay/torch/pulling_1"
     },
     {
       "predicate": {
@@ -25,7 +25,7 @@
         "pull": 0.9,
         "fireflight:torch_type": 0.1
       },
-      "model": "fireflight:item/bow/torch/pulling_2"
+      "model": "fireflight:item/bow/overlay/torch/pulling_2"
     },
 
     {
@@ -33,7 +33,7 @@
         "pulling": 1,
         "fireflight:torch_type": 0.2
       },
-      "model": "fireflight:item/bow/soul_torch/pulling_0"
+      "model": "fireflight:item/bow/overlay/soul_torch/pulling_0"
     },
     {
       "predicate": {
@@ -41,7 +41,7 @@
         "pull": 0.65,
         "fireflight:torch_type": 0.2
       },
-      "model": "fireflight:item/bow/soul_torch/pulling_1"
+      "model": "fireflight:item/bow/overlay/soul_torch/pulling_1"
     },
     {
       "predicate": {
@@ -49,7 +49,7 @@
         "pull": 0.9,
         "fireflight:torch_type": 0.2
       },
-      "model": "fireflight:item/bow/soul_torch/pulling_2"
+      "model": "fireflight:item/bow/overlay/soul_torch/pulling_2"
     },
 
     {
@@ -57,7 +57,7 @@
         "pulling": 1,
         "fireflight:torch_type": 0.3
       },
-      "model": "fireflight:item/bow/redstone_torch/pulling_0"
+      "model": "fireflight:item/bow/overlay/redstone_torch/pulling_0"
     },
     {
       "predicate": {
@@ -65,7 +65,7 @@
         "pull": 0.65,
         "fireflight:torch_type": 0.3
       },
-      "model": "fireflight:item/bow/redstone_torch/pulling_1"
+      "model": "fireflight:item/bow/overlay/redstone_torch/pulling_1"
     },
     {
       "predicate": {
@@ -73,7 +73,7 @@
         "pull": 0.9,
         "fireflight:torch_type": 0.3
       },
-      "model": "fireflight:item/bow/redstone_torch/pulling_2"
+      "model": "fireflight:item/bow/overlay/redstone_torch/pulling_2"
     }
   ]
 }

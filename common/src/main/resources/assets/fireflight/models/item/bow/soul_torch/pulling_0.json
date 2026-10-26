@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "fireflight:item/bow/soul_torch/pulling_0"
-    }
-}
