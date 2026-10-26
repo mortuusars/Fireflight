@@ -1,0 +1,12 @@
+{
+  "match": {
+    "type": [
+      "fireflight:torch",
+      "fireflight:soul_torch",
+      "fireflight:redstone_torch"
+    ]
+  },
+  "luminance": {
+    "type": "lambdynlights:arrow/derived_from_self_item"
+  }
+}
