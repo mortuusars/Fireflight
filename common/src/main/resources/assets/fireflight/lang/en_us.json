@@ -9,6 +9,7 @@
   "fireflight.configuration.offhand_torch_selection": "Offhand Torch Selection",
   "fireflight.configuration.inventory_torch_selection_when_standing": "Inventory Torch Selection: Standing",
   "fireflight.configuration.inventory_torch_selection_when_sneaking": "Inventory Torch Selection: Sneaking",
+  "fireflight.configuration.block_get_held_projectile_changes": "Block 'getHeldProjectile' Changes",
 
   "fireflight.configuration.torch_projectile_stuck_drop_time": "Stuck Projectile Drop Time",
   "fireflight.configuration.dispenser_shoots_torches": "Dispenser Shoots Torches",

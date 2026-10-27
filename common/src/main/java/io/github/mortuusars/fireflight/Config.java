@@ -11,6 +11,7 @@ public class Config {
         public static final ModConfigSpec.EnumValue<OffhandTorchSelection> OFFHAND_TORCH_SELECTION;
         public static final ModConfigSpec.EnumValue<InventoryTorchSelection> INVENTORY_TORCH_SELECTION_WHEN_STANDING;
         public static final ModConfigSpec.EnumValue<InventoryTorchSelection> INVENTORY_TORCH_SELECTION_WHEN_SNEAKING;
+        public static final ModConfigSpec.BooleanValue BLOCK_GET_HELD_PROJECTILE_CHANGES;
 
         public static final ModConfigSpec.IntValue TORCH_PROJECTILE_STUCK_DROP_TIME;
         public static final ModConfigSpec.BooleanValue DISPENSER_SHOOTS_TORCHES;
@@ -62,6 +63,13 @@ public class Config {
                         "IGNORE_TORCHES: Vanilla behavior.",
                         "Default: PRIORITIZE_TORCHES")
                   .defineEnum("inventory_torch_selection_when_sneaking", InventoryTorchSelection.PRIORITIZE_TORCHES);
+
+            BLOCK_GET_HELD_PROJECTILE_CHANGES = builder
+                  .comment("Prevents 'getHeldProjectile' method changes that some mods do that prevent the expected behavior of torch shooting in some cases.",
+                        "For example: without this enabled, Supplementaries Quiver placed anywhere in inventory prevents selecting torch for shooting, unless the torch is in the offhand.",
+                        "Try disabling this setting if you experience issues with ammo selection.",
+                        "Default: true")
+                  .define("block_get_held_projectile_changes", true);
 
             TORCH_PROJECTILE_STUCK_DROP_TIME = builder
                   .comment("How many ticks torch projectile will wait before dropping as an item ",

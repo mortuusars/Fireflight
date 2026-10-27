@@ -9,6 +9,7 @@
   "fireflight.configuration.offhand_torch_selection": "Вибір смолоскипа в іншій руці",
   "fireflight.configuration.inventory_torch_selection_when_standing": "Вибір смолоскипа з інвентарю (стоячи)",
   "fireflight.configuration.inventory_torch_selection_when_sneaking": "Вибір смолоскипа з інвентарю (крадучись)",
+  "fireflight.configuration.block_get_held_projectile_changes": "Заблокувати зміни до 'getHeldProjectile'",
 
   "fireflight.configuration.torch_projectile_stuck_drop_time": "Час до випадіння застряглого снаряда",
   "fireflight.configuration.dispenser_shoots_torches": "Роздавач стріляє смолоскипами",
