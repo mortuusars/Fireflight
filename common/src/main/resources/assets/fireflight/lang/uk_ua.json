@@ -1,0 +1,31 @@
+{
+  "entity.fireflight.torch": "Смолоскип",
+  "entity.fireflight.soul_torch": "Смолоскип душ",
+  "entity.fireflight.redstone_torch": "Редстоуновий смолоскип",
+
+  "advancement.fireflight.shoot_torch.title": "Трохи менше ніж 299792458 м/с",
+  "advancement.fireflight.shoot_torch.description": "Освітліть місцевість, вистріливши смолоскипом із відстані щонайменше 50 блоків",
+
+  "fireflight.configuration.offhand_torch_selection": "Вибір смолоскипа в іншій руці",
+  "fireflight.configuration.inventory_torch_selection_when_standing": "Вибір смолоскипа з інвентарю (стоячи)",
+  "fireflight.configuration.inventory_torch_selection_when_sneaking": "Вибір смолоскипа з інвентарю (крадучись)",
+
+  "fireflight.configuration.torch_projectile_stuck_drop_time": "Час до випадіння застряглого снаряда",
+  "fireflight.configuration.dispenser_shoots_torches": "Роздавач стріляє смолоскипами",
+
+  "fireflight.configuration.velocity_multiplier": "Множник швидкості",
+  "fireflight.configuration.damage": "Шкода",
+  "fireflight.configuration.weapon_durability_cost": "Витрата міцності зброї",
+
+  "fireflight.configuration.torch": "Смолоскип",
+  "fireflight.configuration.ignite_effect_duration": "Тривалість ефекту підпалення",
+
+  "fireflight.configuration.soul_torch": "Смолоскип душ",
+  "fireflight.configuration.wither_effect_duration": "Тривалість ефекту візера",
+
+  "fireflight.configuration.redstone_torch": "Редстоуновий смолоскип",
+  "fireflight.configuration.slowness_effect_duration": "Тривалість ефекту сповільнення",
+
+  "fireflight.configuration.render_torch": "Відображення смолоскипа",
+  "fireflight.configuration.render_torch_as_overlay": "Відображати смолоскип як оверлей"
+}
