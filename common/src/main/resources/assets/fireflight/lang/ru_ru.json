@@ -1,0 +1,32 @@
+{
+  "entity.fireflight.torch": "Факел",
+  "entity.fireflight.soul_torch": "Факел душ",
+  "entity.fireflight.redstone_torch": "Редстоуновый факел",
+
+  "advancement.fireflight.shoot_torch.title": "Почти 299792458 м/с",
+  "advancement.fireflight.shoot_torch.description": "Освети местность, выстрелив факелом с расстояния не менее 50 блоков",
+
+  "fireflight.configuration.offhand_torch_selection": "Выбор факела другой рукой",
+  "fireflight.configuration.inventory_torch_selection_when_standing": "Выбор факела в инвентаре: Стоя",
+  "fireflight.configuration.inventory_torch_selection_when_sneaking": "Выбор факела в инвентаре: Крадучись",
+  "fireflight.configuration.block_get_held_projectile_changes": "Изменения блока 'getHeldProjectile'",
+
+  "fireflight.configuration.torch_projectile_stuck_drop_time": "Время до дропа застрявшего снаряда",
+  "fireflight.configuration.dispenser_shoots_torches": "Раздатчик выстреливает факела",
+
+  "fireflight.configuration.velocity_multiplier": "Множитель скорости",
+  "fireflight.configuration.damage": "Урон",
+  "fireflight.configuration.weapon_durability_cost": "Трата прочности",
+
+  "fireflight.configuration.torch": "Факел",
+  "fireflight.configuration.ignite_effect_duration": "Длительность эффекта поджога",
+
+  "fireflight.configuration.soul_torch": "Факел душ",
+  "fireflight.configuration.wither_effect_duration": "Длительность эффекта Иссушения",
+
+  "fireflight.configuration.redstone_torch": "Редстоуновый факел",
+  "fireflight.configuration.slowness_effect_duration": "Длительность эффекта Замедления",
+
+  "fireflight.configuration.render_torch": "Факел отрисовки",
+  "fireflight.configuration.render_torch_as_overlay": "Отрисовывает факел как оверлей"
+}
